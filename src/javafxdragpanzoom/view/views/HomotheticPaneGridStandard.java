@@ -20,7 +20,7 @@ public class HomotheticPaneGridStandard extends AbstractHomotheticPaneGrid {
 
     @Override
     public void setScale(double scale) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        scaleProperty().set(scale);
     }
 
     @Override

@@ -35,7 +35,8 @@ public class HomotheticPaneRectangleStandard extends AbstractHomotheticPaneRecta
 
     @Override
     public void translate(double dx, double dy) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        setTranslateX(getTranslateX()+dx);
+        setTranslateY(getTranslateY()+dy);
     }
     
 }

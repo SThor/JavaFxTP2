@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafxdragpanzoom.statemachines.DragStateMachine;
+import javafxdragpanzoom.view.controls.HomotheticPaneDragManager;
 import javafxdragpanzoom.view.controls.HomotheticPanePanManager;
 import javafxdragpanzoom.view.views.HomotheticPaneGridStandard;
 import javafxdragpanzoom.view.views.HomotheticPaneRectangleStandard;
@@ -55,8 +56,13 @@ public class DragPanZoomApplication extends Application {
         stage.show();
         
         //Pan
-        DragStateMachine stateMachine = new DragStateMachine();
-        HomotheticPanePanManager manager = new HomotheticPanePanManager(panAndZoomPane, stateMachine);
+        DragStateMachine panStateMachine = new DragStateMachine();
+        HomotheticPanePanManager panManager = new HomotheticPanePanManager(panAndZoomPane, panStateMachine);
+        
+        //Drag
+        DragStateMachine dragStateMachine = new DragStateMachine();
+        HomotheticPaneDragManager dragManager = new HomotheticPaneDragManager(rect1, dragStateMachine);
+        
 
         // Déplacer le noeud avec les touches de direction
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -82,6 +88,8 @@ public class DragPanZoomApplication extends Application {
                         dx = offset;
                         dy = 0;
                         break;
+                    case PLUS:
+                        panAndZoomPane.scale
                     default:
                         break;
                 }
