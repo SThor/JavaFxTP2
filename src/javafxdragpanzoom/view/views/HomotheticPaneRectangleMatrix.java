@@ -1,5 +1,8 @@
 package javafxdragpanzoom.view.views;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Translate;
 
@@ -9,8 +12,9 @@ import javafx.scene.transform.Translate;
  */
 public class HomotheticPaneRectangleMatrix extends AbstractHomotheticPaneRectangle {
 
-    public HomotheticPaneRectangleMatrix() {
-        super();
+
+    public HomotheticPaneRectangleMatrix(DoubleProperty scaleProperty) {
+        super(scaleProperty);
     }
 
     @Override
@@ -29,6 +33,7 @@ public class HomotheticPaneRectangleMatrix extends AbstractHomotheticPaneRectang
     @Override
     public void addScale(double deltaScale, double pivotX, double pivotY) {
         getTransforms().add(new Scale(deltaScale, deltaScale, pivotX, pivotY));
+        
         scaleProperty().set(getScale()*deltaScale);
     }
 

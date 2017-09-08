@@ -26,6 +26,7 @@ import javafxdragpanzoom.view.controls.HomotheticPanePanManager;
 import javafxdragpanzoom.view.controls.HomotheticPaneZoomManager;
 import javafxdragpanzoom.view.views.HomotheticPaneGridMatrix;
 import javafxdragpanzoom.view.views.HomotheticPaneGridStandard;
+import javafxdragpanzoom.view.views.HomotheticPaneRectangleMatrix;
 import javafxdragpanzoom.view.views.HomotheticPaneRectangleStandard;
 
 public class DragPanZoomApplication extends Application {
@@ -46,7 +47,7 @@ public class DragPanZoomApplication extends Application {
         root.getChildren().add(panAndZoomPane);
         
         // Forme sur laquelle on veut faire du drag
-        AbstractHomotheticPaneRectangle rect1 = new HomotheticPaneRectangleStandard();
+        AbstractHomotheticPaneRectangle rect1 = new HomotheticPaneRectangleMatrix(panAndZoomPane.scaleProperty());
         rect1.setLayoutX(450);
         rect1.setLayoutY(450);
         panAndZoomPane.getChildren().add(rect1);
@@ -102,8 +103,8 @@ public class DragPanZoomApplication extends Application {
                     default:
                         break;
                 }
-                rect1.setLayoutX(rect1.getLayoutX() + dx);
-                rect1.setLayoutY(rect1.getLayoutY() + dy);
+                rect1.setTranslateX(rect1.getTranslateX() + dx);
+                rect1.setTranslateY(rect1.getTranslateY() + dy);
             }
         });
     }

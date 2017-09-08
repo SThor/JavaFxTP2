@@ -1,13 +1,15 @@
 package javafxdragpanzoom.view.views;
 
+import javafx.beans.property.DoubleProperty;
+
 /**
  * Pane contenant un rectangle et dont la mise à l'échelle, toujours homothétique, est gérée par les méthodes standard de Node
  * @author saporito
  */
 public class HomotheticPaneRectangleStandard extends AbstractHomotheticPaneRectangle {
 
-    public HomotheticPaneRectangleStandard() {
-        super();
+    public HomotheticPaneRectangleStandard(DoubleProperty scaleProperty) {
+        super(scaleProperty);
         // La seule chose à faire ici est de lier le mécanisme de mise à l'échelle
         // lié au choix d'implémentation (les méthodes standard setScaleX...)
         // au mécanisme de gestion de la mise à l'échelle homothétique 
