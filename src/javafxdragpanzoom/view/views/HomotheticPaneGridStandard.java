@@ -1,5 +1,8 @@
 package javafxdragpanzoom.view.views;
 
+import javafx.geometry.Point2D;
+import javafx.scene.transform.Scale;
+
 /**
  * Pane homothétique dont la mise à l'échelle est gérée par les méthodes standard de Node
  * @author saporito
@@ -25,12 +28,20 @@ public class HomotheticPaneGridStandard extends AbstractHomotheticPaneGrid {
 
     @Override
     public void setScale(double scale, double pivotX, double pivotY) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Point2D screenOldPivot = localToParent(pivotX,pivotY);
+        
+        setScale(scale);
+        
+        Point2D screenNewPivot = localToParent(pivotX,pivotY);
+        double deltaX = screenOldPivot.getX()-screenNewPivot.getX();
+        double deltaY = screenOldPivot.getY()-screenNewPivot.getY();
+        setTranslateX(getTranslateX()+deltaX);
+        setTranslateY(getTranslateY()+deltaY);
     }
 
     @Override
     public void addScale(double deltaScale, double pivotX, double pivotY) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        getTransforms().add(new Scale(deltaScale, deltaScale, pivotX, pivotY));
     }
 
     @Override
