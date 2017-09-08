@@ -24,6 +24,7 @@ import javafxdragpanzoom.statemachines.DragStateMachine;
 import javafxdragpanzoom.view.controls.HomotheticPaneDragManager;
 import javafxdragpanzoom.view.controls.HomotheticPanePanManager;
 import javafxdragpanzoom.view.controls.HomotheticPaneZoomManager;
+import javafxdragpanzoom.view.views.HomotheticPaneGridMatrix;
 import javafxdragpanzoom.view.views.HomotheticPaneGridStandard;
 import javafxdragpanzoom.view.views.HomotheticPaneRectangleStandard;
 
@@ -39,7 +40,7 @@ public class DragPanZoomApplication extends Application {
         Group root = new Group();
 
         // Conteneur sur lequel on veut faire du pan & zoom
-        AbstractHomotheticPane panAndZoomPane = new HomotheticPaneGridStandard();
+        AbstractHomotheticPane panAndZoomPane = new HomotheticPaneGridMatrix();
         panAndZoomPane.setLayoutX(100);
         panAndZoomPane.setLayoutY(100);
         root.getChildren().add(panAndZoomPane);
@@ -93,10 +94,10 @@ public class DragPanZoomApplication extends Application {
                         dy = 0;
                         break;
                     case P:
-                        panAndZoomPane.setScale(panAndZoomPane.getScale()*1.1);
+                        panAndZoomPane.addScale(1.1,0,0);
                         break;
                     case M:
-                        panAndZoomPane.setScale(panAndZoomPane.getScale()/1.1);
+                        panAndZoomPane.addScale(1/1.1,0,0);
                         break;
                     default:
                         break;

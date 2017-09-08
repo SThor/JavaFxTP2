@@ -41,7 +41,8 @@ public class HomotheticPaneGridStandard extends AbstractHomotheticPaneGrid {
 
     @Override
     public void addScale(double deltaScale, double pivotX, double pivotY) {
-        getTransforms().add(new Scale(deltaScale, deltaScale, pivotX, pivotY));
+        double newScale = getScale()*deltaScale;
+        setScale(newScale, pivotX, pivotY);
     }
 
     @Override

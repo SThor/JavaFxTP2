@@ -17,7 +17,7 @@ import javafxdragpanzoom.view.views.AbstractHomotheticPane;
 public class HomotheticPaneZoomManager {
 
     private AbstractHomotheticPane paneToZoom;
-    private final double DEFAULT_ZOOM_FACTOR = 1.2;
+    private final double DEFAULT_ZOOM_FACTOR = 1.01;
     
     public HomotheticPaneZoomManager(AbstractHomotheticPane pane) {
         this.paneToZoom = pane;        
@@ -26,12 +26,17 @@ public class HomotheticPaneZoomManager {
 
     private void connectEvents() {
         paneToZoom.addEventHandler(ScrollEvent.SCROLL, (event) -> {
-            double zoomFactor = DEFAULT_ZOOM_FACTOR;
-            if (event.getDeltaY() <= 0) {
-                // zoom out
-                zoomFactor = 1 / DEFAULT_ZOOM_FACTOR;
-            }
-            paneToZoom.setScale(paneToZoom.getScale()*zoomFactor,event.getX(),event.getY());
+            // Soit :
+            
+//            double zoomFactor = DEFAULT_ZOOM_FACTOR;
+//            if (event.getDeltaY() <= 0) {
+//                // zoom out
+//                zoomFactor = 1 / DEFAULT_ZOOM_FACTOR;
+//            }
+//            paneToZoom.addScale(zoomFactor,event.getX(),event.getY());
+            
+            // ou bien :
+            paneToZoom.addScale(Math.pow(DEFAULT_ZOOM_FACTOR, event.getDeltaY()),event.getX(),event.getY());
         });
     }
     

@@ -3,6 +3,7 @@ package javafxdragpanzoom.view.views;
 import javafx.scene.Group;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Line;
+import javafx.scene.Node;
 
 /**
  * Classe abstraite décrivant un Pane contenant une grille et dont la mise à l'échelle est toujours homothétique
@@ -30,11 +31,27 @@ public abstract class AbstractHomotheticPaneGrid extends AbstractHomotheticPane 
         setHeight(HEIGHT);
         
         for (int i = 50; i < WIDTH; i+=GRID_OFFSET) {
-            grid.getChildren().add(new Line(1,i,HEIGHT,i));
+            Line line = new Line(1,i,HEIGHT,i);
+            grid.getChildren().add(line);
         }
         for (int i = 50; i < HEIGHT; i+=GRID_OFFSET) {
-            grid.getChildren().add(new Line(i,1,i,WIDTH));
+            Line line = new Line(i,1,i,WIDTH);
+            grid.getChildren().add(line);
+            
         }
+
+        
+        scaleProperty().addListener((observable) -> {
+            for (Node node : grid.getChildren()) {
+                if(node instanceof Line){
+                    Line line = (Line)node;
+                    line.setStrokeWidth(1/getScale());
+                }
+            }
+        });
+        
         getChildren().add(0,grid);
+        
+        
     }
 }
